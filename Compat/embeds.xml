@@ -29,6 +29,7 @@
 
     <Script file="Compat.lua"/>
     <Script file="Corrections.lua"/>
+    <Script file="NekoCore.lua"/>
     <Script file="FactionId.lua"/>
     <Script file="QuestTag.lua"/>
     <Script file="QuestReward.lua"/>

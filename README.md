@@ -1,3 +1,20 @@
+# Questie-NekoCore
+
+The Questie build for the [NekoCore](https://github.com/m0nnnna/nekocore) realm, a fork of [divial28/Questie-335](https://github.com/divial28/Questie-335) (itself a fork of [Questie](https://github.com/Questie/Questie)). It ships inside the NekoCore client patch, so players don't install it separately.
+
+NekoCore runs [mod-uac](https://github.com/berubejd/mod-uac) (any race, any class), which changes quest data that stock Questie has baked in. This fork adds one file, `Compat/NekoCore.lua`, applied after every other correction:
+
+- **Class quests opened to the whole faction.** For example, the Blood Knight trials and mounts for every Horde paladin, and the Draenei Call of Water and Call of Air chains for every Alliance shaman. Stock Questie still filtered these by the original race.
+- **mod-uac's own quests**, such as the two Call of Earth quests at the starter shaman trainers.
+- **The class trainers mod-uac places in every starter zone**, so their quests and town icons show where they stand.
+- **NekoCore's paladin chain rule**: once you start one race's chain, the others are hidden.
+
+`Compat/NekoCore.lua` is generated. Don't edit it by hand. Regenerate it from the nekocore repo with `python tools/questie/gen_questie_corrections.py --questie-dir <this repo> --wotlk-root <3.3.5a client>`, then bump `## Version` in the `Questie-335*.toc` files so clients recompile their database.
+
+The 3.3.5a client never updates again, so this fork isn't tracking upstream. It is maintained here from now on.
+
+---
+
 # Questie-335
 A fork of the WoW Classic Questie addon aiming to provide compatibility with Wrath of the Lich King client version 3.3.5a (12340).
 # Installation
