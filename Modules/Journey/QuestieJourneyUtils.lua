@@ -48,5 +48,14 @@ function QuestieJourneyUtils:GetZoneName(id)
             break
         end
     end
+    -- Dungeon and raid zones (Dire Maul 2557, ...) are only in zoneCategoryLookup.
+    if name == l10n("Unknown Zone") then
+        for _, data in pairs(l10n.zoneCategoryLookup) do
+            if data[id] then
+                name = data[id]
+                break
+            end
+        end
+    end
     return name
 end

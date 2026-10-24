@@ -389,6 +389,15 @@ local function GetZoneNameByIDFallback(zoneId)
         end
     end
 
+    -- Dungeon and raid zones (Dire Maul 2557, ...) are only in zoneCategoryLookup.
+    -- Retail clients resolve them through C_Map.GetAreaInfo, which 3.3.5 lacks.
+    for _, zone in pairs(l10n.zoneCategoryLookup) do
+        if zone[zoneId] then
+            zoneCache[zoneId] = zone[zoneId]
+            return zoneCache[zoneId]
+        end
+    end
+
     Questie:Debug(Questie.DEBUG_CRITICAL, "[GetZoneNameByIDFallback]: Unable to find a zone name for zoneId", zoneId)
 
     return "Unknown Zone"
