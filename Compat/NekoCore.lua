@@ -160,6 +160,13 @@ local NEW_QUESTS = {
     [6000001] = {["id"]=6000001,["name"]="Call of Earth",["start"]={3062},["end"]={3062},["minLevel"]=4,["level"]=4,["races"]=528,["classes"]=64,["text"]="Commune with the earth at Meela Dawnstrider's side.",["sort"]=-82},
 }
 
+-- Quests whose kill objectives differ from Questie's WotLK data. The
+-- server keeps the original Classic objectives (mod-individual-progression),
+-- so Questie logged "Missing objective data" for the second one.
+local OBJECTIVES = {
+    [4501] = {{{9166}, {9167}}}, -- Beware of Pterrordax: 10 Pterrordax + 15 Frenzied
+}
+
 local SPAWNS = {
     [198] = {[141]={{59.14,40.47}}},
     [459] = {[141]={{59.21,40.41}},[3524]={{79.59,48.84}}},
@@ -200,6 +207,10 @@ QuestieCompat.RegisterCorrection("questData", function()
         local current = QuestieDB.questData[id]
         fixes[id] = fixes[id] or {}
         fixes[id][questKeys.exclusiveTo] = union(current and current[questKeys.exclusiveTo], others)
+    end
+    for id, objectives in pairs(OBJECTIVES) do
+        fixes[id] = fixes[id] or {}
+        fixes[id][questKeys.objectives] = objectives
     end
     for id, q in pairs(NEW_QUESTS) do
         fixes[id] = {
